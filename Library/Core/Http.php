@@ -3,7 +3,7 @@
 namespace Rave\Library\Core;
 
 /**
- * Classe permettant la redirection exceptionelle ou l'envoie
+ * Classe permettant la redirection ou l'envoie
  * de headers HTTP
  */
 class Http
