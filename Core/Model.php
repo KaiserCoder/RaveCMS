@@ -1,9 +1,10 @@
 <?php
 
-namespace Rave\Core\Database;
+namespace Rave\Core;
 
 use PDOException, PDO;
 use Rave\Config\Config;
+use Rave\Core\Database\DriverFactory;
 
 /**
  * Super classe abstraite Model, doit être héritée par
@@ -18,25 +19,25 @@ abstract class Model
      * @var string
      *  Nom de la table
      */
-    protected static $_table;
+    protected static $table;
     
     /**
      * Attribut désignant la clé primaire de la table
      * @var string
      *  Nom de la clé primaire
      */
-    protected static $_primary;
+    protected static $primary;
     
     /**
      * Attribut statique pour pattern Singleton
      * @var \Rave\Core\Database\Driver\SQLDriver
      * 	Driver de la base de données
      */
-    protected static $_driver;
+    private static $_driver;
     
     /**
      * Méthode accesseur utilisant le pattern Singleton
-     * @return \Rave\Core\Database\Driver\SQLDriver
+     * @return \Rave\Core\Database\Driver\DriverInterface
      * 	Driver de la base de données
      */
 	protected static function _getInstance()
@@ -55,7 +56,7 @@ abstract class Model
      */
     public static function insert(array $rows)
     {
-		$firstHalfStatement = 'INSERT INTO ' . static::$_table . ' (';
+		$firstHalfStatement = 'INSERT INTO ' . static::$table . ' (';
 
 		$secondHalfStatement = ') VALUES (';
 
@@ -83,32 +84,32 @@ abstract class Model
      */
     public static function selectAll()
     {
-		return self::_getInstance()->query('SELECT * FROM ' . static::$_table);
+		return self::_getInstance()->query('SELECT * FROM ' . static::$table);
     }
 
     /**
      * Méthode générique de selection selon une valeur
      * de la clé primaire
-     * @param string $_primary
+     * @param string $primary
      *  Valeur de la clé primaire
      * @return object
      *  Objet contenant les valeurs selectionnées
      */
     public static function select($primary)
     {
-		return self::_getInstance()->queryOne('SELECT * FROM ' . static::$_table . ' WHERE ' . static::$_primary . ' = :primary', [':primary' => $primary]);
+		return self::_getInstance()->queryOne('SELECT * FROM ' . static::$table . ' WHERE ' . static::$primary . ' = :primary', [':primary' => $primary]);
     }
 
     /**
      * Méthode générique de mise à jour
      * @param array $rows
      *  Nouvelles valeurs
-     * @param mixed $_primary
+     * @param mixed $primary
      *  Valeur de la clé primaire
      */
     public static function update(array $rows, $primary)
     {
-		$statement = 'UPDATE ' . static::$_table . ' SET ';
+		$statement = 'UPDATE ' . static::$table . ' SET ';
 
 		foreach ($rows as $key => $value)
 		{
@@ -118,7 +119,7 @@ abstract class Model
 		}
             
 		$request = rtrim($statement, ', ');
-		$request .= ' WHERE ' . static::$_primary . ' = :primary';
+		$request .= ' WHERE ' . static::$primary . ' = :primary';
 
 		$rows[':primary'] = $primary;
 
@@ -128,12 +129,12 @@ abstract class Model
     /**
      * Méthode générique permettant de supprimer
      * une ligne dans la base de données
-     * @param string $_primary
+     * @param string $primary
      *  Clauses de la condition WHERE
      */
     public static function delete($primary)
     {
-		self::_getInstance()->execute('DELETE FROM ' . static::$_table . ' WHERE ' . static::$_primary . ' = :primary', [':primary' => $primary]);
+		self::_getInstance()->execute('DELETE FROM ' . static::$table . ' WHERE ' . static::$primary . ' = :primary', [':primary' => $primary]);
     }
 
     /**
@@ -144,7 +145,7 @@ abstract class Model
      */
     public static function count()
     {
-		return self::_getInstance()->queryOne('SELECT Count(' . static::$_primary . ') AS count FROM ' . static::$_table)->count;
+		return self::_getInstance()->queryOne('SELECT Count(' . static::$primary . ') AS count FROM ' . static::$table)->count;
     }
 
 }

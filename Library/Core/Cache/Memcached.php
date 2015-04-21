@@ -1,6 +1,6 @@
 <?php
 
-namespace Rave\Library\Core;
+namespace Rave\Library\Core\Cache;
 
 use \Exception;
 use \Memcached;

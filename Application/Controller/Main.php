@@ -13,6 +13,7 @@ class Main extends Controller
 
     public function index()
     {
+    	$this->log('test');
         $this->loadView('viewMain', ['users' => UserModel::selectAll()]);
     }
 

@@ -2,19 +2,39 @@
 
 namespace Rave\Core;
 
+use Rave\Config\Config;
+use Rave\Core\Exception\IOException;
+
 /**
  * Super classe abstraite Controller, doit être héritée par
  * tous les controleurs
  */
 abstract class Controller
 {
-
+	/**
+	 * Constantes représentants le niveau
+	 * d'importance d'un log
+	 * @var int
+	 * 	Code de niveau d'importance du log
+	 */
+	const LOG_NOTICE = 0;
+	const LOG_WARNING = 1;
+	const LOG_FATAL_ERROR = 2;
+	
+	/**
+	 * Attribut statique contenant le nom
+	 * du fichier de log courrant
+	 * @var string
+	 * 	Nom du fichier de log
+	 */
+	private static $_currentLogFile;
+	
     /**
      * Nom de la vue chargée en tant que layout
      * @var string/boolean
      *  Nom de la vue, false si l'on ne souhaite pas de layout
      */
-    protected $_layout = false;
+    protected $layout = false;
 
     /**
      * Méthode permettant de charger une vue
@@ -42,75 +62,77 @@ abstract class Controller
 
         $content = ob_get_clean();
 
-        if ($this->_layout === false) {
+        if ($this->layout === false) {
             echo $content;
         } else {
-            include_once ROOT. '/Application/View/Layout/' . $this->_layout . '.php';
+            include_once ROOT. '/Application/View/Layout/' . $this->layout . '.php';
         }
     }
-
+    
     /**
-     * Méthode permettant de charger un model
-     * ou un ensemble de models
-     * @param string /array $modelClass
-     *  Model(s) à charger
+     * Méthode de redirection
+     * @param string $page
+     * 	Page vers laquelle l'utilisateur doit être redirigé
      */
-    protected function loadModel($modelClass)
+    protected function redirect($page)
     {
-        $this->loadFile(ROOT . '/Application/Model/', $modelClass, 'Erreur chargement model');
+    	header('Location: ' . $page);
     }
-
+    
     /**
-     * Méthode permettant de charger un ou plusieurs fichiers
-     * si il s'agit d'un tableau ou d'un array ou d'un string
-     * @param string $basePath
-     *  Chemin de base du/des fichier(s)
-     * @param string /array $file
-     *  Fichier(s) à charger
-     * @param string $error
-     *  Erreur à afficher
+     * Méthode permettant d'écrire des logs
+     * @param string $message
+     * 	Message de log
+     * @param int $priority
+     * 	Priorité du log
      */
-    private function loadFile($basePath, $file, $error)
+    protected function log($message, $priority = self::LOG_NOTICE)
     {
-        if (is_array($file)) {
-            foreach ($file as $class)
-            {
-                $this->requireFile($basePath, $class, $error);
-            }
-        } else {
-            $this->requireFile($basePath, $file, $error);
+    	$log = date('H:i:s');
+
+        switch ($priority) {
+            case self::LOG_NOTICE:
+                $log .= ' : ' . $message;
+                break;
+            case self::LOG_WARNING:
+                $log .= ' WARNING : ' . $message;
+                break;
+            case self::LOG_FATAL_ERROR:
+                $log .= ' FATAL ERROR : ' . $message;
+                break;
+        }
+        
+        try {
+        	$this->_writeLog($log);
+        } catch (IOException $ioException) {
+        	Error::create($ioException->getMessage(), '500');
         }
     }
-
+    
     /**
-     * Méthode permettant d'inclure un fichier
-     * @param string $basePath
-     *  Répertoire dans lequel est le fichier
-     * @param string /array $file
-     *  Nom du/des fichiers
-     * @param string $error
-     *  Message d'erreur
+     * Méthode privée d'écriture du log
+     * @param string $message
+     * 	Message de log
+     * @throws IOException
+     * 	Lance un exception d'entrée/sortie en cas d'erreur d'écriture
      */
-    private function requireFile($basePath, $file, $error)
+    private function _writeLog($message)
     {
-        $path = $basePath . $file . '.php';
-
-        if (file_exists($path)) {
-            require_once $path;
-        } else {
-            Error::create($error, '404');
-        }
-    }
-
-    /**
-     * Méthode permettant de charger une librairie
-     * ou un ensemble de librairies
-     * @param string /array $libraryClass
-     *  Librairie(s) à charger
-     */
-    protected function loadLibrary($libraryClass)
-    {
-        $this->loadFile(ROOT . '/Library/', $libraryClass, 'Erreur chargement library');
+    	if (isset(self::$_currentLogFile)) {
+    		file_put_contents(self::$_currentLogFile, $message . PHP_EOL, FILE_APPEND);
+    	} else {
+    		if (file_exists(ROOT . '/Log') === false) {
+    			mkdir(ROOT . '/Log');
+    		}
+    		
+    		self::$_currentLogFile = ROOT . '/Log/' . uniqid() . '.log';
+    	
+    		if (fopen(self::$_currentLogFile, 'a') === false) {
+    			throw new IOException('Unable to create log file');
+    		}
+    	
+    		$this->_writeLog($message);
+		}
     }
 
     /**
@@ -123,7 +145,7 @@ abstract class Controller
     {
         $file = ROOT . '/Application/View/Layout/' . $layout . '.php';
 
-        $this->_layout = file_exists($file) ? $layout : false;
+        $this->layout = file_exists($file) ? $layout : false;
     }
 
 }

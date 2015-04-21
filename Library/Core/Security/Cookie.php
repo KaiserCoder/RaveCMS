@@ -1,6 +1,6 @@
 <?php
 
-namespace Rave\Library\Core;
+namespace Rave\Library\Core\Security;
 
 class Cookie
 {

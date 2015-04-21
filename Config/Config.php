@@ -11,7 +11,7 @@ use Rave\Core\Database\DriverFactory;
  */
 class Config
 {
-
+    
     /**
      * Attribut déterminant le mode de l'application
      * @var boolean
@@ -70,7 +70,7 @@ class Config
      *  Grain de sel
      */
     private static $_seed = 'f6z5e4f62s1d32v1d653d4g65d4f32v1';
-
+    
     /**
      * Méthode accesseur
      * @return boolean

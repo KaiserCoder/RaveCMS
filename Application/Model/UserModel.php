@@ -2,13 +2,13 @@
 
 namespace Rave\Application\Model;
 
-use Rave\Core\Database\Model;
+use Rave\Core\Model;
 
 class UserModel extends Model
 {
 	
-	protected static $_table = 'user';
+	protected static $table = 'user';
 	
-	protected static $_primary = 'user_id';
+	protected static $primary = 'user_id';
 	
 }
