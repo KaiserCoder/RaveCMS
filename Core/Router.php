@@ -66,7 +66,7 @@ class Router
      */
     private static function _getController()
     {
-        if (isset(self::$_params[self::CONTROLLER_KEY]) && !empty(self::$_params[self::CONTROLLER_KEY])) {
+        if (isset(self::$_params[self::CONTROLLER_KEY]) && empty(self::$_params[self::CONTROLLER_KEY]) === false) {
             $controller = ucfirst(self::$_params[self::CONTROLLER_KEY]);
         } else {
             $controller = Config::getRouter('controller');
@@ -85,7 +85,7 @@ class Router
      */
     private static function _getMethod()
     {
-        if (isset(self::$_params[self::METHOD_KEY]) && !empty(self::$_params[self::METHOD_KEY])) {
+        if (isset(self::$_params[self::METHOD_KEY]) && empty(self::$_params[self::METHOD_KEY]) === false) {
             $action = self::$_params[self::METHOD_KEY];
         } else {
             $action = Config::getRouter('method');

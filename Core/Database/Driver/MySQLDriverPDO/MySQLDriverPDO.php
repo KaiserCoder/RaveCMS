@@ -14,7 +14,7 @@ class MySQLDriverPDO implements DriverInterface
 
     private static function _getInstance()
     {
-        if (!isset(self::$_instance)) {
+        if (isset(self::$_instance) === false) {
             try {
                 self::$_instance = new PDO('mysql:dbname=' . Config::getDatabase('database') . ';host=' . Config::getDatabase('host'), Config::getDatabase('login'), Config::getDatabase('password'));
                 self::$_instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

@@ -15,7 +15,7 @@ class SQLiteDriverPDO implements DriverInterface
 
 	private static function _getInstance()
 	{
-		if (!isset(self::$_instance)) {
+		if (isset(self::$_instance) === false) {
 			try {
 				self::$_instance = new PDO('sqlite:' . Config::getDatabase('path'));
 				self::$_instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

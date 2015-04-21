@@ -125,9 +125,9 @@ abstract class Controller
     			mkdir(ROOT . '/Log');
     		}
     		
-    		self::$_currentLogFile = ROOT . '/Log/' . uniqid() . '.log';
+    		self::$_currentLogFile = ROOT . '/Log/' . date('d-m-Y') . '.log';
     	
-    		if (fopen(self::$_currentLogFile, 'a') === false) {
+    		if (file_exists(self::$_currentLogFile) === false && fopen(self::$_currentLogFile, 'a') === false) {
     			throw new IOException('Unable to create log file');
     		}
     	
