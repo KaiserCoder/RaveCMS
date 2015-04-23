@@ -4,10 +4,10 @@ namespace Rave\Application\Model;
 
 use Rave\Core\Model;
 
-class UserModel extends Model
+class UsersModel extends Model
 {
 	
-	protected static $table = 'user';
+	protected static $table = 'rave_users';
 	
 	protected static $primary = 'user_id';
 	
