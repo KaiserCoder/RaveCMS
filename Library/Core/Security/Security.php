@@ -56,9 +56,11 @@ class Security
      * Méthode permettant de déplacer un fichier uploadé
      * @param string $fileName
      *  Nom du champ d'upload
+     * @param string $path
+     * Chemin vers le repertoire de destination
      * @param array $extensions
      *  Liste des extensions acceptées
-     * @return boolean/string
+     * @return bool /string
      *  Nom du fichier ou FALSE en cas d'erreur
      */
     public static function moveUploadedFile($fileName, $path, $extensions)
@@ -68,7 +70,7 @@ class Security
 
             if (in_array($extension, $extensions)) {
                 $file = uniqid() . $extension;
-                
+
                 if (move_uploaded_file($_FILES[$fileName]['tmp_name'], ROOT . $path . '/' . $file) === false) {
                     return false;
                 } else {
