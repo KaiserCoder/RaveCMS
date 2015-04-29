@@ -3,7 +3,11 @@
 namespace Rave\Library\Core\Security;
 
 use Rave\Config\Config;
+
 use Rave\Core\Exception\IOException;
+use Rave\Core\Exception\MIMEException;
+use Rave\Core\Exception\UploadException;
+use Rave\Core\Exception\ExtensionException;
 
 /**
  * Classe contenant différentes méthodes liées à la sécurité
