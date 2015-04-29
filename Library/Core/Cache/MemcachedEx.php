@@ -2,8 +2,7 @@
 
 namespace Rave\Library\Core\Cache;
 
-use \Exception;
-use \Memcached;
+use Exception, Memcached;
 
 /**
  * Wrapper for Memcached with local storage support
@@ -19,7 +18,7 @@ use \Memcached;
  * @link https://github.com/AlekseyKorzun/memcached-wrapper-php
  * @link http://www.alekseykorzun.com
  */
-class Memcached
+class MemcachedEx
 {
     /**
      * Dog-pile prevention delay in seconds, adjust if you have a constant miss
