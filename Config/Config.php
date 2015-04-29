@@ -69,7 +69,19 @@ class Config
      * @var string
      *  Grain de sel
      */
-    private static $_seed = 'f6z5e4f62s1d32v1d653d4g65d4f32v1';
+    private static $_databaseSeed = 'f6z5e4f62s1d32v1d653d4g65d4f32v1';
+    
+    /**
+     * Valeurs nécessaires au chiffrement des cookies
+     * @var array
+     * 	Clé, iv encodé en hexa, cypher et mode de chiffrement
+     */
+    private static $_cookie = [
+    	'mode'   => MCRYPT_MODE_CBC,
+    	'cypher' => MCRYPT_RIJNDAEL_256,
+    	'key'    => 'c70911343b8a3b94f5780ce5e65d2daa',
+    	'iv'     => 'dc4931bc7b44eebb62e4e5e590a54461401b8ea9d9b39546d7aab4b44cdfe3c6'
+    ];
     
     /**
      * Méthode accesseur
@@ -140,9 +152,21 @@ class Config
      * @return string
      *  Grain de sel
      */
-    public static function getSeed()
+    public static function getDatabaseSeed()
     {
-        return self::$_seed;
+        return self::$_databaseSeed;
+    }
+
+	/**
+	 * Méthode accesseur
+	 * @return mixed
+	 * 	Entrée demandée
+	 * @param string
+	 * 	Clé du tableau cookie
+	 */
+    public static function getCookie($key)
+    {
+    	return self::$_cookie[$key];
     }
 
 }

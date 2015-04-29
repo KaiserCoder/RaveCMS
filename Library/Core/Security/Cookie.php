@@ -2,35 +2,44 @@
 
 namespace Rave\Library\Core\Security;
 
+use Rave\Config\Config;
+
+/**
+ * Classe permettant de créer des cookie chiffrés
+ */
 class Cookie
 {
-	private static $_iv;
-	private static $_key;
 
-	const IV_SOURCE = MCRYPT_RAND;
-	const ENCRYPTION_MODE = MCRYPT_MODE_CBC;
-	const ENCRYPTION_CYPHER = MCRYPT_TWOFISH256;
-
-	private function _generateKeyAndIv()
-	{
-		$keySize = mcrypt_module_get_algo_key_size(self::ENCRYPTION_CYPHER);
-		$ivSize = mcrypt_get_iv_size(self::ENCRYPTION_CYPHER, self::ENCRYPTION_MODE);
-		
-		self::$_iv = mcrypt_create_iv($ivSize, self::IV_SOURCE);
-		self::$_key = substr(hash('tiger192,4', uniqid()), 0, $keySize);
-	}
-
+	/**
+	 * Méthode de création de cookies chiffrés
+	 * @param string $name
+	 * 	Nom du cookie
+	 * @param string $value
+	 * 	Valeur stockée
+	 * @param int $expire
+	 * 	Temps de vie du cookie
+	 * @return boolean
+	 * 	True en cas de succès false sinon
+	 */
 	public static function encrypt($name, $value, $expire)
 	{
-		self::_generateKeyAndIv();
-		setcookie($name, base64_encode(mcrypt_encrypt(self::ENCRYPTION_CYPHER, self::$_key, $value, self::ENCRYPTION_MODE, self::$_iv)), time() + $expire, null, null, false, true);
-		return base64_encode(self::$_key . '_' . self::$_iv);
+		return setcookie($name, base64_encode(mcrypt_encrypt(Config::getCookie('cypher'), Config::getCookie('key'), $value, Config::getCookie('mode'), hex2bin(Config::getCookie('iv')))), time() + $expire, null, null, false, true);
 	}
 
-	public static function decrypt($name, $key)
+	/**
+	 * Méthode permettant de récupérer un cookie chiffré
+	 * @param string $name
+	 * 	Nom du cookie
+	 * @return mixed
+	 * 	Valeur stockée dans le cookie
+	 */
+	public static function decrypt($name)
 	{
-		$keyAndIv = explode(base64_decode($key), '_');
-		return mcrypt_decrypt(self::ENCRYPTION_CYPHER, $keyAndIv[0], base64_decode($_COOKIE[$name]), self::ENCRYPTION_MODE, $keyAndIv[1]);
+		if (isset($_COOKIE[$name])) {
+			return mcrypt_decrypt(Config::getCookie('cypher'), Config::getCookie('key'), base64_decode($_COOKIE[$name]), Config::getCookie('mode'), hex2bin(Config::getCookie('iv')));
+		} else {
+			return null;
+		}
 	}
 
 }

@@ -3,6 +3,7 @@
 namespace Rave\Library\Core\Security;
 
 use Rave\Config\Config;
+use Rave\Core\Exception\IOException;
 
 /**
  * Classe contenant différentes méthodes liées à la sécurité
@@ -20,7 +21,7 @@ class Security
      */
     public static function hash($data)
     {
-        return hash('whirlpool', $data . Config::getSeed(), false);
+        return hash('whirlpool', $data . Config::getDatabaseSeed(), false);
     }
 
     /**
@@ -57,30 +58,42 @@ class Security
      * @param string $fileName
      *  Nom du champ d'upload
      * @param string $path
-     * Chemin vers le repertoire de destination
+     *  Chemin relatif vers lequel le fichier doit être déplacé
      * @param array $extensions
      *  Liste des extensions acceptées
-     * @return bool /string
-     *  Nom du fichier ou FALSE en cas d'erreur
+     * @param array $mimeTypes
+     *  Liste des types MIME acceptés
+     * @return string
+     *  Nom du fichier
+     * @throws IOException,
+     * 		   MIMEException
+     * 		   UploadException,
+     * 		   ExtensionException
+     * Lève une exception en fonction de l'erreur rencontrée
      */
-    public static function moveUploadedFile($fileName, $path, $extensions)
+    public static function moveUploadedFile($fileName, $path, array $extensions = [], array $mimeTypes = [])
     {
         if (isset($_FILES[$fileName])) {
             $extension = strrchr($_FILES[$fileName]['name'], '.');
-
-            if (in_array($extension, $extensions)) {
+            if (empty($extensions) || in_array($extension, $extensions)) {
                 $file = uniqid() . $extension;
-
-                if (move_uploaded_file($_FILES[$fileName]['tmp_name'], ROOT . $path . '/' . $file) === false) {
-                    return false;
-                } else {
-                    return $file;
-                }
+                $fileInfo = finfo_open(FILEINFO_MIME_TYPE);
+		if (empty($mimeTypes) || in_array(finfo_file($fileInfo, $_FILES[$fileName]['tmp_name']), $mimeTypes)) {
+		    finfo_close($fileInfo);
+	            if (move_uploaded_file($_FILES[$fileName]['tmp_name'], ROOT . $path . '/' . $file) === false) {
+	                throw new IOException('Failed to move the uploaded file');
+	            } else {
+	                return $file;
+	            }
+		} else {
+		    finfo_close($fileInfo);
+		    throw new MIMEException('Wrong MIME type');
+		}
             } else {
-                return false;
+                throw new ExtensionException('Wrong file extension');
             }
         } else {
-            return false;
+            throw new UploadException('Can not find uploaded file in superglobale FILES');
         }
     }
 

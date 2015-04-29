@@ -107,7 +107,7 @@ abstract class Model
      * @param mixed $primary
      *  Valeur de la clé primaire
      */
-    public static function update(array $rows, $primary)
+    public static function update($primary, array $rows)
     {
 		$statement = 'UPDATE ' . static::$table . ' SET ';
 

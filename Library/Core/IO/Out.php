@@ -92,7 +92,7 @@ class Out
      */
     public static function mail($to, $subject, $message)
     {
-        mail(Config::getEmail($to), $subject, $message);
+        mail($to, $subject, $message);
     }
 
 }

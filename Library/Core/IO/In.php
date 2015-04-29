@@ -63,7 +63,7 @@ class In
     /**
      * Méthode vérifiant l'existence des variables
      * POST passées en paramètre
-     * @param array /string $post
+     * @param array|string $post
      *  Variable(s) POST
      * @return boolean
      *  Vrai si la/les variables existent
@@ -73,14 +73,14 @@ class In
     {
         if (is_array($post)) {
             foreach ($post as $data) {
-                if (self::post($data) === null) {
+                if (isset($_POST[$data]) === false) {
                     return false;
                 }
             }
 
             return true;
         } else {
-            return self::post($post) !== null;
+            return isset($_POST[$post]);
         }
     }
 
