@@ -35,11 +35,7 @@ class Cookie
 	 */
 	public static function decrypt($name)
 	{
-		if (isset($_COOKIE[$name])) {
-			return mcrypt_decrypt(Config::getCookie('cypher'), Config::getCookie('key'), base64_decode($_COOKIE[$name]), Config::getCookie('mode'), hex2bin(Config::getCookie('iv')));
-		} else {
-			return null;
-		}
+		return isset($_COOKIE[$name]) ? mcrypt_decrypt(Config::getCookie('cypher'), Config::getCookie('key'), base64_decode($_COOKIE[$name]), Config::getCookie('mode'), hex2bin(Config::getCookie('iv'))) : null;
 	}
 
 }

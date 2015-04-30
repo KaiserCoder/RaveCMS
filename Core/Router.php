@@ -2,6 +2,7 @@
 
 namespace Rave\Core;
 
+use Rave\Core\Error;
 use Rave\Config\Config;
 
 /**
@@ -50,7 +51,7 @@ class Router
         if (file_exists($controllerFile)) {
             require_once $controllerFile;
         } else {
-            Error::create('Erreur controller inexistant');
+            Error::create('Erreur controller inexistant', '404');
         }
 
         $class = new $controllerClass;
@@ -109,7 +110,7 @@ class Router
         if (method_exists($class, $action) && is_callable([$class, $action])) {
             call_user_func_array([$class, $action], self::$_params);
         } else {
-            Error::create('Erreur methode controller inexistante');
+            Error::create('Erreur methode controller inexistante', '404');
         }
     }
 
