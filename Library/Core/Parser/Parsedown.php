@@ -10,8 +10,8 @@ namespace Rave\Library\Core\Parser;
 # (c) Emanuil Rusev
 # http://erusev.com
 #
-# For the full license information, view the LICENSE file that was distributed
-# with this source code.
+# For the full license information, view the LICENSE file on
+# the github repo https://github.com/erusev/parsedown
 #
 #
 

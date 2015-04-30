@@ -2,9 +2,9 @@
 
 namespace Rave\Core\Exception;
 
-class ExtensionException extends \Exception
+class FileTypeException extends \Exception
 {
-	const ERROR_CODE = 4;
+	const ERROR_CODE = 3;
 
     public function __construct($message)
     {

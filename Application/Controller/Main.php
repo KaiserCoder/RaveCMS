@@ -1,10 +1,6 @@
 <?php
 
 use Rave\Core\Controller;
-use Rave\Application\Model\UserModel;
-
-use Rave\Library\Core\Security\Cookie;
-use Rave\Library\Core\Cache\MemcachedEx;
 
 class Main extends Controller
 {
@@ -15,8 +11,8 @@ class Main extends Controller
     }
 
     public function index()
-    {    	
-        $this->loadView('viewMain');
+    {
+		$this->loadView('viewMain');
     }
 
 }

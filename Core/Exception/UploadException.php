@@ -4,7 +4,7 @@ namespace Rave\Core\Exception;
 
 class UploadException extends \Exception
 {
-	const ERROR_CODE = 5;
+	const ERROR_CODE = 4;
 
 	public function __construct($message)
 	{

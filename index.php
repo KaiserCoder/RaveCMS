@@ -2,12 +2,12 @@
 
 session_start();
 
-use Rave\Library\Core\IO\In;
-
 use Rave\Core\Router;
 use Rave\Core\Autoloader;
 
-define('ROOT', __DIR__);
+use Rave\Library\Core\IO\In;
+
+const ROOT = __DIR__;
 
 require_once ROOT . '/Core/Autoloader.php';
 
