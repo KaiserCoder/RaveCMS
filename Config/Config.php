@@ -2,8 +2,8 @@
 
 namespace Rave\Config;
 
-use Rave\Core\Error;
 use Rave\Core\Database\DriverFactory;
+use Rave\Core\Error;
 
 /**
  * Classe à modifier pour configurer les informations
@@ -11,19 +11,19 @@ use Rave\Core\Database\DriverFactory;
  */
 class Config
 {
-    
+
     /**
      * Attribut déterminant le mode de l'application
      * @var boolean
      *  Vrai si mode debug, faux si mode production
      */
-    private static $_debug = true;
-    
+    private static $_debug = false;
+
     /**
      * Attribut déterminant le driver de base de données
      * utilisé
      * @var string
-     * 	Constante determinant le type de driver à utiliser
+     *    Constante determinant le type de driver à utiliser
      */
     private static $_databaseDriver = DriverFactory::MYSQL_PDO;
 
@@ -34,10 +34,10 @@ class Config
      *  Liste des infos de connexion
      */
     private static $_database = [
-        'host'     => 'localhost',
-        'database' => 'database',
-        'login'    => 'root',
-        'password' => 'root'
+        'host' => 'localhost',
+        'database' => 'ravecms',
+        'login' => 'root',
+        'password' => ''
     ];
 
     /**
@@ -49,9 +49,9 @@ class Config
      */
     private static $_router = [
         'controller' => 'Main',
-        'method'     => 'index'
+        'method' => 'index'
     ];
-    
+
     /**
      * Attribut contenant les différentes pages d'erreur
      * @var array
@@ -70,19 +70,19 @@ class Config
      *  Grain de sel
      */
     private static $_databaseSeed = 'f6z5e4f62s1d32v1d653d4g65d4f32v1';
-    
+
     /**
      * Valeurs nécessaires au chiffrement des cookies
      * @var array
-     * 	Clé, iv encodé en hexa, cypher et mode de chiffrement
+     *    Clé, iv encodé en hexa, cypher et mode de chiffrement
      */
     private static $_cookie = [
-    	'mode'   => MCRYPT_MODE_CBC,
-    	'cypher' => MCRYPT_RIJNDAEL_256,
-    	'key'    => 'c70911343b8a3b94f5780ce5e65d2daa',
-    	'iv'     => 'dc4931bc7b44eebb62e4e5e590a54461401b8ea9d9b39546d7aab4b44cdfe3c6'
+        'mode' => MCRYPT_MODE_CBC,
+        'cypher' => MCRYPT_RIJNDAEL_256,
+        'key' => 'c70911343b8a3b94f5780ce5e65d2daa',
+        'iv' => 'dc4931bc7b44eebb62e4e5e590a54461401b8ea9d9b39546d7aab4b44cdfe3c6'
     ];
-    
+
     /**
      * Méthode accesseur
      * @return boolean
@@ -92,15 +92,15 @@ class Config
     {
         return self::$_debug;
     }
-    
+
     /**
      * Méthode accesseur
      * @return string
-     * 	Nom du driver pour la base de données
+     *    Nom du driver pour la base de données
      */
     public static function getDatabaseDriver()
     {
-    	return self::$_databaseDriver;
+        return self::$_databaseDriver;
     }
 
     /**
@@ -112,11 +112,11 @@ class Config
      */
     public static function getDatabase($key)
     {
-    	if (isset(self::$_database[$key])) {
-        	return self::$_database[$key];
-    	} else {
-    		Error::create('Unknown database key ' . $key, '500');
-    	}
+        if (isset(self::$_database[$key])) {
+            return self::$_database[$key];
+        } else {
+            Error::create('Unknown database key ' . $key, '500');
+        }
     }
 
     /**
@@ -130,7 +130,7 @@ class Config
     {
         return self::$_router[$key];
     }
-    
+
     /**
      * Méthode accesseur
      * @param string $key
@@ -140,11 +140,11 @@ class Config
      */
     public static function getError($key)
     {
-    	if (isset(self::$_error[$key])) {
-    		return self::$_error[$key];
-    	} else {
-    		Error::create('Unknown error key ' . $key, '404');
-    	}
+        if (isset(self::$_error[$key])) {
+            return self::$_error[$key];
+        } else {
+            Error::create('Unknown error key ' . $key, '404');
+        }
     }
 
     /**
@@ -157,16 +157,16 @@ class Config
         return self::$_databaseSeed;
     }
 
-	/**
-	 * Méthode accesseur
-	 * @return mixed
-	 * 	Entrée demandée
-	 * @param string
-	 * 	Clé du tableau cookie
-	 */
+    /**
+     * Méthode accesseur
+     * @return mixed
+     *    Entrée demandée
+     * @param string
+     *    Clé du tableau cookie
+     */
     public static function getCookie($key)
     {
-    	return self::$_cookie[$key];
+        return self::$_cookie[$key];
     }
 
 }

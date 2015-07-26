@@ -102,7 +102,7 @@ abstract class Controller
         }
 
         try {
-            $this->_writeLog($log);
+            $this->writeLog($log);
         } catch (IOException $ioException) {
             Error::create($ioException->getMessage(), '500');
         }
@@ -115,7 +115,7 @@ abstract class Controller
      * @throws IOException
      *    Lance un exception d'entrée/sortie en cas d'erreur d'écriture
      */
-    private function _writeLog($message)
+    private function writeLog($message)
     {
         if (isset(self::$_currentLogFile)) {
             file_put_contents(self::$_currentLogFile, $message . PHP_EOL, FILE_APPEND);
@@ -130,7 +130,7 @@ abstract class Controller
                 throw new IOException('Unable to create log file');
             }
 
-            $this->_writeLog($message);
+            $this->writeLog($message);
         }
     }
 

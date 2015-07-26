@@ -24,7 +24,7 @@ class Error
         if (Config::isDebug()) {
             die($errorMessage);
         } else {
-            self::_show($errorCode);
+            self::show($errorCode);
         }
     }
 
@@ -33,7 +33,7 @@ class Error
      * d'erreur
      * @param $errorCode
      */
-    private static function _show($errorCode)
+    private static function show($errorCode)
     {
         switch ($errorCode) {
             case '403':
@@ -48,5 +48,21 @@ class Error
         }
         die();
     }
+
+    public static function header($errorCode)
+    {
+        switch ($errorCode) {
+            case '403':
+                header('HTTP/1.0 403 Forbidden');
+                break;
+            case '404':
+                header('HTTP/1.0 404 Not Found');
+                break;
+            case '500':
+                header('HTTP/1.0 500 Internal Server Error');
+                break;
+        }
+    }
+
 
 }

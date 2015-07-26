@@ -58,7 +58,7 @@ abstract class Model
 
         $statement = $firstHalfRequest . $secondHalfRequest . ')';
 
-        self::_getInstance()->execute($statement, $rows);
+        self::getInstance()->execute($statement, $rows);
     }
 
     /**
@@ -66,7 +66,7 @@ abstract class Model
      * @return \Rave\Core\Database\Driver\DriverInterface
      *    Driver de la base de données
      */
-    protected static function _getInstance()
+    protected static function getInstance()
     {
         if (isset(self::$_driver) === false) {
             self::$_driver = DriverFactory::connect(Config::getDatabaseDriver());
@@ -82,7 +82,7 @@ abstract class Model
      */
     public static function selectAll()
     {
-        return self::_getInstance()->query('SELECT * FROM ' . static::$table);
+        return self::getInstance()->query('SELECT * FROM ' . static::$table);
     }
 
     /**
@@ -95,7 +95,7 @@ abstract class Model
      */
     public static function select($primary)
     {
-        return self::_getInstance()->queryOne('SELECT * FROM ' . static::$table . ' WHERE ' . static::$primary . ' = :primary',
+        return self::getInstance()->queryOne('SELECT * FROM ' . static::$table . ' WHERE ' . static::$primary . ' = :primary',
             [':primary' => $primary]);
     }
 
@@ -121,7 +121,7 @@ abstract class Model
 
         $rows[':primary'] = $primary;
 
-        self::_getInstance()->execute($request, $rows);
+        self::getInstance()->execute($request, $rows);
     }
 
     /**
@@ -132,7 +132,7 @@ abstract class Model
      */
     public static function delete($primary)
     {
-        self::_getInstance()->execute('DELETE FROM ' . static::$table . ' WHERE ' . static::$primary . ' = :primary',
+        self::getInstance()->execute('DELETE FROM ' . static::$table . ' WHERE ' . static::$primary . ' = :primary',
             [':primary' => $primary]);
     }
 
@@ -144,7 +144,7 @@ abstract class Model
      */
     public static function count()
     {
-        return self::_getInstance()->queryOne('SELECT Count(' . static::$primary . ') AS count FROM ' . static::$table)->count;
+        return self::getInstance()->queryOne('SELECT Count(' . static::$primary . ') AS count FROM ' . static::$table)->count;
     }
 
 }

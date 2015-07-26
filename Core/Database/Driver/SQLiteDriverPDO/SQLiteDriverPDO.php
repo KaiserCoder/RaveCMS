@@ -15,13 +15,13 @@ class SQLiteDriverPDO implements DriverInterface
 
     public static function query($statement, array $values = [])
     {
-        return self::_queryDatabase($statement, $values, false);
+        return self::queryDatabase($statement, $values, false);
     }
 
-    private static function _queryDatabase($statement, array $values, $unique)
+    private static function queryDatabase($statement, array $values, $unique)
     {
         try {
-            $sql = self::_getInstance()->prepare($statement);
+            $sql = self::getInstance()->prepare($statement);
             $sql->execute($values);
             if ($unique === true) {
                 return $sql->fetch(self::FETCH_STYLE);
@@ -33,7 +33,7 @@ class SQLiteDriverPDO implements DriverInterface
         }
     }
 
-    private static function _getInstance()
+    private static function getInstance()
     {
         if (isset(self::$_instance) === false) {
             try {
@@ -49,13 +49,13 @@ class SQLiteDriverPDO implements DriverInterface
 
     public static function queryOne($statement, array $values = [])
     {
-        return self::_queryDatabase($statement, $values, true);
+        return self::queryDatabase($statement, $values, true);
     }
 
     public static function execute($statement, array $values = [])
     {
         try {
-            $sql = self::_getInstance()->prepare($statement);
+            $sql = self::getInstance()->prepare($statement);
             $sql->execute($values);
         } catch (PDOException $pdoException) {
             Error::create($pdoException->getMessage(), '500');
