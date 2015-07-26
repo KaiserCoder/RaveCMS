@@ -1,4 +1,4 @@
-CREATE TABLE rave_users (
+CREATE TABLE users (
   user_id             BIGINT(20) AUTO_INCREMENT,
   user_login          VARCHAR(80) UNIQUE,
   user_email          VARCHAR(80) UNIQUE,

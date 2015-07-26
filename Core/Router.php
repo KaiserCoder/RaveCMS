@@ -29,7 +29,7 @@ class Router
      * @var array
      *  Paramètres passés dans l'URL
      */
-    private static $_params;
+    private static $params;
 
     /**
      * Méthode permettant la gestion des routes
@@ -41,7 +41,7 @@ class Router
      */
     public static function get($get)
     {
-        self::$_params = explode('/', $get);
+        self::$params = explode('/', $get);
 
         $controllerClass = self::getController();
 
@@ -69,13 +69,13 @@ class Router
      */
     private static function getController()
     {
-        if (isset(self::$_params[self::CONTROLLER_KEY]) && empty(self::$_params[self::CONTROLLER_KEY]) === false) {
-            $controller = ucfirst(self::$_params[self::CONTROLLER_KEY]);
+        if (isset(self::$params[self::CONTROLLER_KEY]) && empty(self::$params[self::CONTROLLER_KEY]) === false) {
+            $controller = ucfirst(self::$params[self::CONTROLLER_KEY]);
         } else {
             $controller = Config::getRouter('controller');
         }
 
-        unset(self::$_params[self::CONTROLLER_KEY]);
+        unset(self::$params[self::CONTROLLER_KEY]);
 
         return str_replace('-', '_', $controller);
     }
@@ -89,13 +89,13 @@ class Router
      */
     private static function getMethod()
     {
-        if (isset(self::$_params[self::METHOD_KEY]) && empty(self::$_params[self::METHOD_KEY]) === false) {
-            $action = self::$_params[self::METHOD_KEY];
+        if (isset(self::$params[self::METHOD_KEY]) && empty(self::$params[self::METHOD_KEY]) === false) {
+            $action = self::$params[self::METHOD_KEY];
         } else {
             $action = Config::getRouter('method');
         }
 
-        unset(self::$_params[self::METHOD_KEY]);
+        unset(self::$params[self::METHOD_KEY]);
 
         return str_replace('-', '_', $action);
     }
@@ -112,7 +112,7 @@ class Router
     private static function callMethod($class, $action)
     {
         if (method_exists($class, $action) && is_callable([$class, $action])) {
-            call_user_func_array([$class, $action], self::$_params);
+            call_user_func_array([$class, $action], self::$params);
         } else {
             Error::create('Erreur methode controller inexistante', '404');
         }

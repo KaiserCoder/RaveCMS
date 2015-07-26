@@ -1,5 +1,6 @@
-<?php include 'header.php'; ?>
-    <div class="row">
-        <?= $content ?>
-    </div>
+<?php
+include 'header.php';
+include 'topbar.php';
+?>
+<?= $content ?>
 <?php include 'footer.php';
