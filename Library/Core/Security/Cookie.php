@@ -17,7 +17,7 @@ class Cookie
      *    Nom du cookie
      * @param string $value
      *    Valeur stockée
-     * @param int $expire
+     * @param int    $expire
      *    Temps de vie du cookie
      * @return boolean
      *    True en cas de succès false sinon

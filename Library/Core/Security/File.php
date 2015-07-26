@@ -20,9 +20,9 @@ class File
      *  Nom du champ d'upload
      * @param string $uploadPath
      *  Chemin relatif vers lequel le fichier doit être déplacé
-     * @param array $extensions
+     * @param array  $extensions
      *  Liste des extensions acceptées
-     * @param array $mimeTypes
+     * @param array  $mimeTypes
      *  Liste des types MIME acceptés
      * @return string
      *  Nom du fichier

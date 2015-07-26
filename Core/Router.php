@@ -106,7 +106,7 @@ class Router
      *
      * @param Controller $class
      *  Controleur appelé
-     * @param string $action
+     * @param string     $action
      *  Méthode appelée
      */
     private static function callMethod($class, $action)

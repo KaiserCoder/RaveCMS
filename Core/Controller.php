@@ -44,7 +44,7 @@ abstract class Controller
      *
      * @param string $view
      *  Nom de la vue
-     * @param array $data
+     * @param array  $data
      *  Données à transmettre à la vue
      */
     protected function loadView($view, array $data = [])
@@ -88,7 +88,7 @@ abstract class Controller
      *
      * @param string $message
      *    Message de log
-     * @param int $priority
+     * @param int    $priority
      *    Priorité du log
      */
     protected function log($message, $priority = self::LOG_NOTICE)

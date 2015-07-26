@@ -65,7 +65,7 @@ class Out
      *  Nom du COOKIE
      * @param string $value
      *  Valeur du COOKIE
-     * @param int $expire
+     * @param int    $expire
      *  Durée du COOKIE
      */
     public static function cookie($name, $value, $expire)
