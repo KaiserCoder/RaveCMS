@@ -9,7 +9,8 @@ use Rave\Core\Router;
 use Rave\Library\Core\IO\In;
 
 define('ROOT', __DIR__);
-define('WEB_ROOT', dirname(filter_input(INPUT_SERVER, 'SCRIPT_NAME')) . DIRECTORY_SEPARATOR);
+define('WEB_ROOT', str_replace('\\', '/', dirname(filter_input(INPUT_SERVER, 'SCRIPT_NAME')) . DIRECTORY_SEPARATOR));
+define('PUBLIC_ROOT', WEB_ROOT . 'public/');
 
 require_once ROOT . '/Core/Autoloader.php';
 
