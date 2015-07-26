@@ -2,7 +2,6 @@
 
 namespace Rave\Core;
 
-use Rave\Core\Error;
 use Rave\Config\Config;
 
 /**

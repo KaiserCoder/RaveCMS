@@ -12,7 +12,7 @@ class Main extends Controller
 
     public function index()
     {
-		$this->loadView('viewMain');
+        $this->loadView('viewMain');
     }
 
 }

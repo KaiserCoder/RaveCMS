@@ -2,8 +2,6 @@
 
 namespace Rave\Library\Core\IO;
 
-use Rave\Config\Config;
-
 /**
  * Classe gérant la création de variables SESSION et COOKIE
  */
