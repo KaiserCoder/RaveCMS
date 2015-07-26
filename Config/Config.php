@@ -14,6 +14,7 @@ class Config
 
     /**
      * Attribut déterminant le mode de l'application
+     *
      * @var boolean
      *  Vrai si mode debug, faux si mode production
      */
@@ -22,6 +23,7 @@ class Config
     /**
      * Attribut déterminant le driver de base de données
      * utilisé
+     *
      * @var string
      *    Constante determinant le type de driver à utiliser
      */
@@ -30,6 +32,7 @@ class Config
     /**
      * Attribut contenant les différentes informations
      * nécessaires à la connexion à la base de données
+     *
      * @var array
      *  Liste des infos de connexion
      */
@@ -43,6 +46,7 @@ class Config
     /**
      * Attribut contenant les différentes informations
      * nécessaires au Router
+     *
      * @var array
      *  Liste contenant le nom du controller et de la
      *  méthode à appeller par defaut
@@ -54,6 +58,7 @@ class Config
 
     /**
      * Attribut contenant les différentes pages d'erreur
+     *
      * @var array
      *  Liste contenant les nom des controllers
      *  pour chaque type d'erreur
@@ -66,6 +71,7 @@ class Config
 
     /**
      * Grain de sel pour la fonction de Hashage
+     *
      * @var string
      *  Grain de sel
      */
@@ -73,6 +79,7 @@ class Config
 
     /**
      * Valeurs nécessaires au chiffrement des cookies
+     *
      * @var array
      *    Clé, iv encodé en hexa, cypher et mode de chiffrement
      */
@@ -85,6 +92,7 @@ class Config
 
     /**
      * Méthode accesseur
+     *
      * @return boolean
      *  Attribut debug
      */
@@ -95,6 +103,7 @@ class Config
 
     /**
      * Méthode accesseur
+     *
      * @return string
      *    Nom du driver pour la base de données
      */
@@ -155,6 +164,7 @@ class Config
 
     /**
      * Méthode accesseur
+     *
      * @return string
      *  Grain de sel
      */
@@ -166,7 +176,7 @@ class Config
     /**
      * Méthode accesseur
      *
-*@return mixed
+     * @return mixed
      *    Entrée demandée
      *
      * @param string
