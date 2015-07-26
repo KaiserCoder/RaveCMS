@@ -34,7 +34,7 @@ class Config
      *  Liste des infos de connexion
      */
     private static $_database = [
-        'host' => 'localhost',
+        'host'  => 'localhost',
         'database' => 'ravecms',
         'login' => 'root',
         'password' => ''
@@ -79,8 +79,8 @@ class Config
     private static $_cookie = [
         'mode' => MCRYPT_MODE_CBC,
         'cypher' => MCRYPT_RIJNDAEL_256,
-        'key' => 'c70911343b8a3b94f5780ce5e65d2daa',
-        'iv' => 'dc4931bc7b44eebb62e4e5e590a54461401b8ea9d9b39546d7aab4b44cdfe3c6'
+        'key'  => 'c70911343b8a3b94f5780ce5e65d2daa',
+        'iv'   => 'dc4931bc7b44eebb62e4e5e590a54461401b8ea9d9b39546d7aab4b44cdfe3c6'
     ];
 
     /**
@@ -105,8 +105,10 @@ class Config
 
     /**
      * Méthode accesseur
+     *
      * @param string
      *  Attribut databases
+     *
      * @return string
      *  Valeur associée à la clé
      */
@@ -121,8 +123,10 @@ class Config
 
     /**
      * Méthode accesseur
+     *
      * @param string $key
      *  Clé de la liste
+     *
      * @return string
      *  Valeur associée à la clé
      */
@@ -133,8 +137,10 @@ class Config
 
     /**
      * Méthode accesseur
+     *
      * @param string $key
      *  Clé de la liste
+     *
      * @return string
      *  Valeur associée à la clé
      */
@@ -159,8 +165,10 @@ class Config
 
     /**
      * Méthode accesseur
-     * @return mixed
+     *
+*@return mixed
      *    Entrée demandée
+     *
      * @param string
      *    Clé du tableau cookie
      */

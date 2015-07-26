@@ -12,6 +12,7 @@ class In
     /**
      * Méthode permettant de récupérer les données GET
      * nettoyées
+     *
      * @param string $get
      *  Nom de la variable GET
      * @return string
@@ -25,6 +26,7 @@ class In
     /**
      * Méthode permettant de récupérer les données de
      * SESSION
+     *
      * @param string $session
      *  Nom de la variable de SESSION
      * @return string
@@ -38,6 +40,7 @@ class In
     /**
      * Méthode permettant de récupérer les données de
      * SESSION deserialisées
+     *
      * @param string $session
      *  Nom de la variable de SESSION
      * @return string
@@ -50,6 +53,7 @@ class In
 
     /**
      * Méthode permettant de récupérer un COOKIE
+     *
      * @param string $cookie
      *  Nom du COOKIE
      * @return string
@@ -63,6 +67,7 @@ class In
     /**
      * Méthode vérifiant l'existence des variables
      * POST passées en paramètre
+     *
      * @param array|string $post
      *  Variable(s) POST
      * @return boolean
@@ -87,6 +92,7 @@ class In
     /**
      * Méthode permettant de récupérer les données POST
      * nettoyées
+     *
      * @param string $post
      *  Nom de la variable POST
      * @return string

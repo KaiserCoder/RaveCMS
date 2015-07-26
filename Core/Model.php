@@ -15,6 +15,7 @@ abstract class Model
 
     /**
      * Attribut désignant la table sur laquelle le model opère
+     *
      * @var string
      *  Nom de la table
      */
@@ -22,6 +23,7 @@ abstract class Model
 
     /**
      * Attribut désignant la clé primaire de la table
+     *
      * @var string
      *  Nom de la clé primaire
      */
@@ -29,6 +31,7 @@ abstract class Model
 
     /**
      * Attribut statique pour pattern Singleton
+     *
      * @var \Rave\Core\Database\Driver\SQLDriver
      *    Driver de la base de données
      */
@@ -36,6 +39,7 @@ abstract class Model
 
     /**
      * Méthode d'insertion générique
+     *
      * @param array $rows
      *  Valeurs à inserer
      */
@@ -63,6 +67,7 @@ abstract class Model
 
     /**
      * Méthode accesseur utilisant le pattern Singleton
+     *
      * @return \Rave\Core\Database\Driver\DriverInterface
      *    Driver de la base de données
      */
@@ -77,6 +82,7 @@ abstract class Model
 
     /**
      * Méthode de selection d'une table entière générique
+     *
      * @return array
      *  Tableau d'objets
      */
@@ -88,6 +94,7 @@ abstract class Model
     /**
      * Méthode générique de selection selon une valeur
      * de la clé primaire
+     *
      * @param string $primary
      *  Valeur de la clé primaire
      * @return object
@@ -101,6 +108,7 @@ abstract class Model
 
     /**
      * Méthode générique de mise à jour
+     *
      * @param array $rows
      *  Nouvelles valeurs
      * @param mixed $primary
@@ -127,6 +135,7 @@ abstract class Model
     /**
      * Méthode générique permettant de supprimer
      * une ligne dans la base de données
+     *
      * @param string $primary
      *  Clauses de la condition WHERE
      */
@@ -139,6 +148,7 @@ abstract class Model
     /**
      * Méthode permettant de conter le nombre d'entrées
      * d'une table
+     *
      * @return int
      *  Nombre de lignes comptées
      */

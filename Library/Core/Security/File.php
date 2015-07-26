@@ -15,6 +15,7 @@ class File
 
     /**
      * Méthode permettant de déplacer un fichier uploadé
+     *
      * @param string $fileName
      *  Nom du champ d'upload
      * @param string $uploadPath
@@ -28,7 +29,7 @@ class File
      * @throws IOException,
      * @throws UploadException,
      * @throws FileTypeException;
-     * Lève une exception en fonction de l'erreur rencontrée
+     *  Lève une exception en fonction de l'erreur rencontrée
      */
     public static function moveUploadedFile($fileName, $uploadPath, array $extensions = [], array $mimeTypes = [])
     {

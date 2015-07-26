@@ -18,6 +18,7 @@ class Autoloader
 
     /**
      * Méthode appelée lors de l'autoload d'une classe
+     *
      * @param string $className
      *  Nom de la classe à inclure
      */

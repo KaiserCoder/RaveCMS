@@ -10,6 +10,7 @@ class Out
 
     /**
      * Méthode permettant de créer une variable de SESSION
+     *
      * @param string $name
      *  Nom de la variable de SESSION
      * @param string $value
@@ -23,6 +24,7 @@ class Out
     /**
      * Méthode permettant de créer une variable de SESSION
      * serialisée
+     *
      * @param string $name
      *  Nom de la variable de SESSION
      * @param string $value
@@ -45,6 +47,7 @@ class Out
 
     /**
      * Méthode permettant de supprimer une variable de SESSION
+     *
      * @param string $name
      *  Nom de la variable à supprimer
      */
@@ -57,6 +60,7 @@ class Out
 
     /**
      * Méthode permettant de créer un COOKIE
+     *
      * @param string $name
      *  Nom du COOKIE
      * @param string $value
@@ -71,6 +75,7 @@ class Out
 
     /**
      * Méthode permettant de supprimer un COOKIE
+     *
      * @param string $name
      *  Nom du COOKIE à supprimer
      */
@@ -81,6 +86,7 @@ class Out
 
     /**
      * Méthode permettant l'envoi d'un mail
+     *
      * @param string $to
      *  Destinataire
      * @param string $subject

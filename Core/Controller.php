@@ -13,6 +13,7 @@ abstract class Controller
     /**
      * Constantes représentants le niveau
      * d'importance d'un log
+     *
      * @var int
      *    Code de niveau d'importance du log
      */
@@ -23,6 +24,7 @@ abstract class Controller
     /**
      * Attribut statique contenant le nom
      * du fichier de log courrant
+     *
      * @var string
      *    Nom du fichier de log
      */
@@ -30,6 +32,7 @@ abstract class Controller
 
     /**
      * Nom de la vue chargée en tant que layout
+     *
      * @var string/boolean
      *  Nom de la vue, false si l'on ne souhaite pas de layout
      */
@@ -38,6 +41,7 @@ abstract class Controller
     /**
      * Méthode permettant de charger une vue
      * et/ou de lui transmettre des données
+     *
      * @param string $view
      *  Nom de la vue
      * @param array $data
@@ -70,6 +74,7 @@ abstract class Controller
 
     /**
      * Méthode de redirection
+     *
      * @param string $page
      *    Page vers laquelle l'utilisateur doit être redirigé
      */
@@ -80,6 +85,7 @@ abstract class Controller
 
     /**
      * Méthode permettant d'écrire des logs
+     *
      * @param string $message
      *    Message de log
      * @param int $priority
@@ -110,6 +116,7 @@ abstract class Controller
 
     /**
      * Méthode privée d'écriture du log
+     *
      * @param string $message
      *    Message de log
      * @throws IOException
@@ -136,6 +143,7 @@ abstract class Controller
 
     /**
      * Méthode permettant de modifier le layout
+     *
      * @param string $layout
      *  Nom du layout, false si l'on ne souhaite
      *  pas en charger

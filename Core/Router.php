@@ -25,6 +25,7 @@ class Router
     /**
      * Attribut contenant les paramètres passés
      * dans l'URL
+     *
      * @var array
      *  Paramètres passés dans l'URL
      */
@@ -32,6 +33,7 @@ class Router
 
     /**
      * Méthode permettant la gestion des routes
+     *
      * @param string $get
      *  Url contenant le nom du controleur et la méthode
      *  à appeler ainsi que les possibles paramètres
@@ -61,6 +63,7 @@ class Router
     /**
      * Méthode retournant le controleur appelé dans
      * l'url
+     *
      * @return string
      *  Retourne le nom du controleur
      */
@@ -80,6 +83,7 @@ class Router
     /**
      * Méthode permettant de déterminer la méthode
      * à appeler
+     *
      * @return string
      *  Retourne le nom de la méthode
      */
@@ -99,6 +103,7 @@ class Router
     /**
      * Méthode permettant d'appeler la méthode du controleur
      * et de lui passer les possibles paramètres
+     *
      * @param Controller $class
      *  Controleur appelé
      * @param string $action

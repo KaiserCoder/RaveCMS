@@ -12,6 +12,7 @@ class Cookie
 
     /**
      * Méthode de création de cookies chiffrés
+     *
      * @param string $name
      *    Nom du cookie
      * @param string $value
@@ -31,6 +32,7 @@ class Cookie
 
     /**
      * Méthode permettant de récupérer un cookie chiffré
+     *
      * @param string $name
      *    Nom du cookie
      * @return mixed

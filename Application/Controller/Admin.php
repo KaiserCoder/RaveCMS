@@ -12,7 +12,6 @@ class Admin extends Controller
 
     public function index()
     {
-
         $this->loadView('adminLogin');
     }
 

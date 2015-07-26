@@ -14,6 +14,7 @@ class String
     /**
      * Méthode de hash à utiliser avant une insertion
      * de mot de passe dans la base de données
+     *
      * @param string $data
      *  Chaine de caractères à crypter
      * @return string
@@ -27,6 +28,7 @@ class String
     /**
      * Méthode permettant de nettoyer une chaine de caractères
      * afin d'éviter les failles XSS et autres
+     *
      * @param string $data
      *  Chaine de caractères à nettoyer
      * @return string
@@ -43,8 +45,10 @@ class String
     /**
      * Méthode vérifiant si la chaine de caractères passée
      * en paramètre est un email
+     *
      * @param string $email
      *  Chaine de caractère à vérifier
+     *
      * @return boolean
      *  Vrai si la chaine est un email
      */
