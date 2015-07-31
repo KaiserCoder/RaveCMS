@@ -1,4 +1,4 @@
-<form action="<?= WEB_ROOT ?>/admin/update-photo/<?= $photo->id ?>" method="post">
+<form action="<?= WEB_ROOT ?>admin/update-photo/<?= $photo->id ?>" method="post">
     <div class="form-group">
         <label>Title</label>
         <input class="form-control" type="text" name="title" value="<?= $photo->title ?>"/>

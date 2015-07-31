@@ -1,4 +1,4 @@
-<form action="<?= WEB_ROOT ?>/admin/login" method="post">
+<form action="<?= WEB_ROOT ?>admin/login" method="post">
     <div class="form-group">
         <label for="login">Login</label>
         <input class="form-control" id="login" placeholder="Enter login" type="text" name="login"/>

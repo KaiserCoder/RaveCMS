@@ -9,10 +9,10 @@
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.2/js/foundation.min.js"></script>
 
-<script src="<?= PUBLIC_ROOT ?>js/slick.min.js"></script>
+<script src="<?= WEB_ROOT ?>public/js/slick.min.js"></script>
 
 <!-- Main JavaScript-->
-<script src="<?= PUBLIC_ROOT ?>js/main.js"></script>
+<script src="<?= WEB_ROOT ?>public/js/main.js"></script>
 
 </body>
 </html>

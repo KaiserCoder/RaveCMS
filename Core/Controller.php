@@ -86,7 +86,7 @@ abstract class Controller
      */
     protected function redirect($page)
     {
-        header('Location: ' . WEB_ROOT . '/' . $page);
+        header('Location: ' . WEB_ROOT . $page);
     }
 
     /**

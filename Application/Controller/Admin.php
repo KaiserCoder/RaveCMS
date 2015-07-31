@@ -16,7 +16,7 @@ class Admin extends Controller
 
     public function __construct()
     {
-        $this->setLayout('admin', ['loggedIn' => true]);
+        $this->setLayout('admin', ['loggedIn' => Session::check('admin')]);
     }
 
     public function index()

@@ -7,12 +7,12 @@ class Main extends Controller
 
     public function __construct()
     {
-        $this->setLayout('main');
+        $this->setLayout('default');
     }
 
     public function index()
     {
-        $this->loadView('carousel');
+        $this->loadView('viewMain');
     }
 
 }

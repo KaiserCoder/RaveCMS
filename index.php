@@ -8,7 +8,7 @@ use Rave\Core\Router;
 use Rave\Library\Core\IO\In;
 
 define('ROOT', __DIR__);
-define('WEB_ROOT', dirname(filter_input(INPUT_SERVER, 'SCRIPT_NAME')));
+define('WEB_ROOT', dirname(filter_input(INPUT_SERVER, 'SCRIPT_NAME')) . '/');
 
 require_once ROOT . '/Core/Autoloader.php';
 

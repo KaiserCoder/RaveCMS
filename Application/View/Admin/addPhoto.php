@@ -1,4 +1,4 @@
-<form action="<?= WEB_ROOT ?>/admin/add-photo" method="post" enctype="multipart/form-data" onsubmit="valid()">
+<form action="<?= WEB_ROOT ?>admin/add-photo" method="post" enctype="multipart/form-data" onsubmit="valid()">
     <div class="form-group">
         <label>Title</label>
         <input class="form-control" type="text" name="title"/>
