@@ -1,1 +1,1 @@
-500
+<p>Internal server error</p>

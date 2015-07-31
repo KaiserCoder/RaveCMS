@@ -10,8 +10,7 @@ use Rave\Core\Error;
 
 class SQLiteDriverPDO implements DriverInterface
 {
-    const FETCH_STYLE = PDO::FETCH_OBJ;
-    private static $_instance;
+    private static $instance;
 
     public static function query($statement, array $values = [])
     {
@@ -24,9 +23,9 @@ class SQLiteDriverPDO implements DriverInterface
             $sql = self::getInstance()->prepare($statement);
             $sql->execute($values);
             if ($unique === true) {
-                return $sql->fetch(self::FETCH_STYLE);
+                return $sql->fetch(PDO::FETCH_OBJ);
             } else {
-                return $sql->fetchAll(self::FETCH_STYLE);
+                return $sql->fetchAll(PDO::FETCH_OBJ);
             }
         } catch (PDOException $pdoException) {
             Error::create($pdoException->getMessage(), '500');
@@ -35,16 +34,16 @@ class SQLiteDriverPDO implements DriverInterface
 
     private static function getInstance()
     {
-        if (isset(self::$_instance) === false) {
+        if (isset(self::$instance) === false) {
             try {
-                self::$_instance = new PDO('sqlite:' . Config::getDatabase('path'));
-                self::$_instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                self::$instance = new PDO('sqlite:' . Config::getDatabase('path'));
+                self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $pdoException) {
                 Error::create($pdoException->getMessage(), '500');
             }
         }
 
-        return self::$_instance;
+        return self::$instance;
     }
 
     public static function queryOne($statement, array $values = [])

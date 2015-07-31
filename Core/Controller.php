@@ -20,7 +20,6 @@ abstract class Controller
     const LOG_NOTICE = 0;
     const LOG_WARNING = 1;
     const LOG_FATAL_ERROR = 2;
-
     /**
      * Attribut statique contenant le nom
      * du fichier de log courrant
@@ -28,8 +27,15 @@ abstract class Controller
      * @var string
      *    Nom du fichier de log
      */
-    private static $_currentLogFile;
-
+    private static $currentLogFile;
+    /**
+     * Données à passer à la vue
+     * par défaut
+     *
+     * @var array
+     *  Tableau des données
+     */
+    protected $data = [];
     /**
      * Nom de la vue chargée en tant que layout
      *
@@ -49,8 +55,8 @@ abstract class Controller
      */
     protected function loadView($view, array $data = [])
     {
-        if (empty($data) === false) {
-            extract($data);
+        if (empty($data) === false || empty($this->data) === false) {
+            extract(array_merge($this->data, $data));
         }
 
         $file = ROOT . '/Application/View/' . get_class($this) . '/' . $view . '.php';
@@ -80,7 +86,7 @@ abstract class Controller
      */
     protected function redirect($page)
     {
-        header('Location: ' . $page);
+        header('Location: ' . WEB_ROOT . '/' . $page);
     }
 
     /**
@@ -124,16 +130,16 @@ abstract class Controller
      */
     private function writeLog($message)
     {
-        if (isset(self::$_currentLogFile)) {
-            file_put_contents(self::$_currentLogFile, $message . PHP_EOL, FILE_APPEND);
+        if (isset(self::$currentLogFile)) {
+            file_put_contents(self::$currentLogFile, $message . PHP_EOL, FILE_APPEND);
         } else {
             if (file_exists(ROOT . '/Log') === false) {
                 mkdir(ROOT . '/Log');
             }
 
-            self::$_currentLogFile = ROOT . '/Log/' . date('d-m-Y') . '.log';
+            self::$currentLogFile = ROOT . '/Log/' . date('d-m-Y') . '.log';
 
-            if (file_exists(self::$_currentLogFile) === false && fopen(self::$_currentLogFile, 'a') === false) {
+            if (file_exists(self::$currentLogFile) === false && fopen(self::$currentLogFile, 'a') === false) {
                 throw new IOException('Unable to create log file');
             }
 
@@ -147,12 +153,13 @@ abstract class Controller
      * @param string $layout
      *  Nom du layout, false si l'on ne souhaite
      *  pas en charger
+     * @param array  $data
+     *  Données à passer à la vue par défaut
      */
-    protected function setLayout($layout)
+    protected function setLayout($layout, array $data = [])
     {
-        $file = ROOT . '/Application/View/Layout/' . $layout . '.php';
-
-        $this->layout = file_exists($file) ? $layout : false;
+        $this->data = $data;
+        $this->layout = file_exists(ROOT . '/Application/View/Layout/' . $layout . '.php') ? $layout : false;
     }
 
 }

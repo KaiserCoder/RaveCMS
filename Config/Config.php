@@ -18,7 +18,7 @@ class Config
      * @var boolean
      *  Vrai si mode debug, faux si mode production
      */
-    private static $_debug = true;
+    private static $debug = true;
 
     /**
      * Attribut déterminant le driver de base de données
@@ -27,7 +27,7 @@ class Config
      * @var string
      *    Constante determinant le type de driver à utiliser
      */
-    private static $_databaseDriver = DriverFactory::MYSQL_PDO;
+    private static $databaseDriver = DriverFactory::MYSQL_PDO;
 
     /**
      * Attribut contenant les différentes informations
@@ -36,7 +36,7 @@ class Config
      * @var array
      *  Liste des infos de connexion
      */
-    private static $_database = [
+    private static $database = [
         'host'     => 'localhost',
         'database' => 'ravecms',
         'login'    => 'root',
@@ -51,7 +51,7 @@ class Config
      *  Liste contenant le nom du controller et de la
      *  méthode à appeller par defaut
      */
-    private static $_router = [
+    private static $router = [
         'controller' => 'Main',
         'method'     => 'index'
     ];
@@ -63,10 +63,15 @@ class Config
      *  Liste contenant les nom des controllers
      *  pour chaque type d'erreur
      */
-    private static $_error = [
+    private static $error = [
         '500' => 'error/internal-server-error',
         '404' => 'error/not-found',
         '403' => 'error/forbidden'
+    ];
+
+    private static $session = [
+        'admin' => '4e8z3f7vdff8ze65azd25ef46e4f986z',
+        'user'  => 'f4e6h2v5z9f56se4fs67er4ht4h+drgr'
     ];
 
     /**
@@ -75,7 +80,7 @@ class Config
      * @var string
      *  Grain de sel
      */
-    private static $_databaseSeed = 'f6z5e4f62s1d32v1d653d4g65d4f32v1';
+    private static $databaseSeed = 'f6z5e4f62s1d32v1d653d4g65d4f32v1';
 
     /**
      * Valeurs nécessaires au chiffrement des cookies
@@ -83,7 +88,7 @@ class Config
      * @var array
      *    Clé, iv encodé en hexa, cypher et mode de chiffrement
      */
-    private static $_cookie = [
+    private static $encryption = [
         'mode'   => MCRYPT_MODE_CBC,
         'cypher' => MCRYPT_RIJNDAEL_256,
         'key'    => 'c70911343b8a3b94f5780ce5e65d2daa',
@@ -98,7 +103,7 @@ class Config
      */
     public static function isDebug()
     {
-        return self::$_debug;
+        return self::$debug;
     }
 
     /**
@@ -109,7 +114,7 @@ class Config
      */
     public static function getDatabaseDriver()
     {
-        return self::$_databaseDriver;
+        return self::$databaseDriver;
     }
 
     /**
@@ -117,14 +122,13 @@ class Config
      *
      * @param string
      *  Attribut databases
-     *
      * @return string
      *  Valeur associée à la clé
      */
     public static function getDatabase($key)
     {
-        if (isset(self::$_database[$key])) {
-            return self::$_database[$key];
+        if (isset(self::$database[$key])) {
+            return self::$database[$key];
         } else {
             Error::create('Unknown database key ' . $key, '500');
         }
@@ -135,13 +139,12 @@ class Config
      *
      * @param string $key
      *  Clé de la liste
-     *
      * @return string
      *  Valeur associée à la clé
      */
     public static function getRouter($key)
     {
-        return self::$_router[$key];
+        return self::$router[$key];
     }
 
     /**
@@ -149,16 +152,32 @@ class Config
      *
      * @param string $key
      *  Clé de la liste
-     *
      * @return string
      *  Valeur associée à la clé
      */
     public static function getError($key)
     {
-        if (isset(self::$_error[$key])) {
-            return self::$_error[$key];
+        if (isset(self::$error[$key])) {
+            return self::$error[$key];
         } else {
             Error::create('Unknown error key ' . $key, '404');
+        }
+    }
+
+    /**
+     * Méthode accesseur
+     *
+     * @param string
+     *  Clé de session demandée
+     * @return string
+     *  Clé de la session
+     */
+    public static function getSession($key)
+    {
+        if (isset(self::$session[$key])) {
+            return self::$session[$key];
+        } else {
+            Error::create('Unknown session key ' . $key, '500');
         }
     }
 
@@ -170,7 +189,7 @@ class Config
      */
     public static function getDatabaseSeed()
     {
-        return self::$_databaseSeed;
+        return self::$databaseSeed;
     }
 
     /**
@@ -178,13 +197,12 @@ class Config
      *
      * @return mixed
      *    Entrée demandée
-     *
      * @param string
      *    Clé du tableau cookie
      */
-    public static function getCookie($key)
+    public static function getEncryption($key)
     {
-        return self::$_cookie[$key];
+        return self::$encryption[$key];
     }
 
 }

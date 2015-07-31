@@ -14,6 +14,17 @@ class File
 {
 
     /**
+     * Méthode retournant le checksum d'un fichier
+     *
+     * @param $filePath
+     * @return string
+     */
+    public static function checkSum($filePath)
+    {
+        return file_exists(ROOT . '/' . $filePath) ? hash('sha1', file_get_contents(ROOT . '/' . $filePath)) : null;
+    }
+
+    /**
      * Méthode permettant de déplacer un fichier uploadé
      *
      * @param string $fileName

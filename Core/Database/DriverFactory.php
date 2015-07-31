@@ -16,7 +16,6 @@ class DriverFactory
         switch ($driverConstant) {
             case self::MYSQL_PDO:
                 return new MySQLDriverPDO();
-                break;
             case self::SQLITE_PDO:
                 return new SQLiteDriverPDO();
             default:

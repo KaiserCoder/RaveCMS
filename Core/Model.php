@@ -35,7 +35,7 @@ abstract class Model
      * @var \Rave\Core\Database\Driver\SQLDriver
      *    Driver de la base de données
      */
-    private static $_driver;
+    private static $driver;
 
     /**
      * Méthode d'insertion générique
@@ -73,11 +73,11 @@ abstract class Model
      */
     protected static function getInstance()
     {
-        if (isset(self::$_driver) === false) {
-            self::$_driver = DriverFactory::connect(Config::getDatabaseDriver());
+        if (isset(self::$driver) === false) {
+            self::$driver = DriverFactory::connect(Config::getDatabaseDriver());
         }
 
-        return self::$_driver;
+        return self::$driver;
     }
 
     /**
@@ -155,6 +155,21 @@ abstract class Model
     public static function count()
     {
         return self::getInstance()->queryOne('SELECT Count(' . static::$primary . ') AS count FROM ' . static::$table)->count;
+    }
+
+    /**
+     * Méthode permettant de vérifier l'existance
+     * d'une entrée
+     *
+     * @param $primary
+     *  Valeur de la clé primaire
+     * @return bool
+     *  Retourne true si la valeur existe
+     */
+    public static function exists($primary)
+    {
+        return self::getInstance()->queryOne('SELECT Count(' . static::$primary . ') AS count FROM ' . static::$table . ' WHERE ' . static::$primary . ' = :primary',
+            [':primary' => $primary])->count > 0;
     }
 
 }

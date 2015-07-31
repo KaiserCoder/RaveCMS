@@ -25,9 +25,9 @@ class Cookie
     public static function encrypt($name, $value, $expire)
     {
         return setcookie($name,
-            base64_encode(mcrypt_encrypt(Config::getCookie('cypher'), Config::getCookie('key'), $value,
-                Config::getCookie('mode'), hex2bin(Config::getCookie('iv')))), time() + $expire, null, null, false,
-            true);
+            base64_encode(mcrypt_encrypt(Config::getEncryption('cypher'), Config::getEncryption('key'), $value,
+                Config::getEncryption('mode'), hex2bin(Config::getEncryption('iv')))), time() + $expire, null, null,
+            false, true);
     }
 
     /**
@@ -40,8 +40,8 @@ class Cookie
      */
     public static function decrypt($name)
     {
-        return isset($_COOKIE[$name]) ? mcrypt_decrypt(Config::getCookie('cypher'), Config::getCookie('key'),
-            base64_decode($_COOKIE[$name]), Config::getCookie('mode'), hex2bin(Config::getCookie('iv'))) : null;
+        return isset($_COOKIE[$name]) ? mcrypt_decrypt(Config::getEncryption('cypher'), Config::getEncryption('key'),
+            base64_decode($_COOKIE[$name]), Config::getEncryption('mode'), hex2bin(Config::getEncryption('iv'))) : null;
     }
 
 }

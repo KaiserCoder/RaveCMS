@@ -20,7 +20,7 @@ class Many extends Controller
             $catid = '';
         }
 
-        $this->loadView("viewMany", ["id" => $catid]);
+        $this->loadView("viewMany", ["name" => "categories", "id" => $catid]);
 
     }
 
@@ -30,7 +30,7 @@ class Many extends Controller
             $catid = '';
         }
 
-        $this->loadView("viewMany", ["id" => $catid]);
+        $this->loadView("viewMany", ["name" => "category", "id" => $catid]);
 
     }
 

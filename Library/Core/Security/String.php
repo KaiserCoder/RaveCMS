@@ -48,7 +48,6 @@ class String
      *
      * @param string $email
      *  Chaine de caractère à vérifier
-     *
      * @return boolean
      *  Vrai si la chaine est un email
      */
